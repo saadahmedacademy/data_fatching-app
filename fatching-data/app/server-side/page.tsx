@@ -1,4 +1,9 @@
-import React from 'react';
+import {
+  TextRevealCard,
+  TextRevealCardDescription,
+  TextRevealCardTitle,
+} from "@/components/ui/text-reveal-card";
+import React from "react";
 
 type BookApiType = {
   id: number;
@@ -9,12 +14,12 @@ type BookApiType = {
 
 // Fetch data directly in the component (server-side)
 const fetchBooks = async (): Promise<BookApiType[]> => {
-  const response = await fetch('https://simple-books-api.glitch.me/books', {
+  const response = await fetch("https://simple-books-api.glitch.me/books", {
     next: { revalidate: 10 }, // Revalidate every 10 seconds
   });
 
   if (!response.ok) {
-    throw new Error('Failed to fetch books data');
+    throw new Error("Failed to fetch books data");
   }
   return response.json();
 };
@@ -25,23 +30,59 @@ const Page = async () => {
   try {
     books = await fetchBooks(); // Fetch data directly on the server
   } catch (error) {
-    console.error('Error fetching books:', error);
+    console.error("Error fetching books:", error);
   }
 
   return (
-    <div className="container mx-auto mt-8 py-4 px-2 grid place-items-center gap-4 gap-y-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-      {books.length > 0 ? (
-        books.map((book) => (
-          <div key={book.id} className="bg-white dark:bg-zinc-900 rounded-[22px] w-[300px] h-[560px] px-3 py-2">
-            <h2 className="text-2xl font-bold text-center">{book.name}</h2>
-            <p className="text-center">{book.type}</p>
-            <p className="text-center">{book.available ? 'Available' : 'Not Available'}</p>
-          </div>
-        ))
-      ) : (
-        <p className="text-center text-red-500">No books available</p>
-      )}
-    </div>
+    <main className="container mx-auto">
+      <section className="flex flex-col w-full">
+        <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
+          <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">
+            Client Side Data:
+          </h1>
+          <div
+            style={{ borderBottom: "6px double yellow" }}
+            className="h-1 w-[19rem] rounded"
+          />
+        </div>
+        <p className="lg:w-1/2 my-4 w-full leading-relaxed text-white">
+          This is the client side component data, to see the dynapic route click
+          on the project cards <br />
+          and the dynamic route.
+        </p>
+      </section>
+      
+      <section className="w-full mt-8 py-4 px-2 grid place-items-center gap-4 gap-y-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {books.length > 0 ? (
+          books.map((book) => (
+            <div className="flex items-center justify-center bg-[#0E0E10] p-1 rounded-2xl md:w-[360px] hover:shadow-purple-500 w-full shadow-lg shadow-green-500">
+              <TextRevealCard
+                className="text-white px-4"
+                text={book.name}
+                revealText={book.name}
+              >
+                <div className="w-full flex flex-col items-start px-2 gap-2">
+                  <TextRevealCardTitle
+                    className={
+                      book.available == true
+                        ? "text-green-500 border border-green-500 rounded-full px-4 py-1"
+                        : "text-red-500 border border-red-500 rounded-full px-4 py"
+                    }
+                  >
+                    {book.available ? "Available" : "Not available"}
+                  </TextRevealCardTitle>
+                  <TextRevealCardDescription className="text-white pl-3">
+                    {book.type}
+                  </TextRevealCardDescription>
+                </div>
+              </TextRevealCard>
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-red-500">No books available</p>
+        )}
+      </section>
+    </main>
   );
 };
 

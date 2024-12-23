@@ -46,12 +46,31 @@ const ClientComponent = () => {
   }
 
   return (
-    <div className="container mx-auto mt-8 py-4 px-2 grid place-items-center gap-4 gap-y-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <main className='container mx-auto px-4'>
+       
+       <section className="flex flex-col w-full">
+          <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
+            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">
+              Client Side Data:
+            </h1>
+            <div
+              style={{ borderBottom: "6px double yellow" }}
+              className="h-1 w-[19rem] rounded"
+            />
+          </div>
+          <p className="lg:w-1/2 my-4 w-full leading-relaxed text-white">
+           This is the client side component data,
+           to see the dynapic route click on the project cards <br/>
+           and the dynamic route.
+          </p>
+          </section>  
+
+    <section className="w-full mt-8 px-2 grid place-items-center gap-4 gap-y-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {ClientSideData.map((data) => (
         <BackgroundGradient 
          key={data.id} className=''>
           <div className=" rounded-[22px] w-[300px] h-[560px] px-3 py-2 bg-white dark:bg-zinc-900">
-            <div className="w-full h-[200px]">
+            <div className="w-full h-[300px]">
               <Image
                 src={`${data.image}`}
                 alt={data.title}
@@ -85,7 +104,8 @@ const ClientComponent = () => {
           </div>
         </BackgroundGradient >
       ))}
-    </div>
+    </section>
+    </main>
   );
 };
 

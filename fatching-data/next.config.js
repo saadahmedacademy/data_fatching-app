@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Config options here
   images: {
-    domains: ['dummyjson.com'], // Add the domain serving the image
+    domains: ['cdn.dummyjson.com'], // Add the domain serving the images
   },
 };
 
 module.exports = nextConfig;
+

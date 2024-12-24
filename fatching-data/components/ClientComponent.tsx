@@ -61,16 +61,17 @@ const ClientComponent = () => {
           throw new Error("Failed to fetch data");
         }
         const dataJson = await response.json();
-        setClientSideData(dataJson);
+        setClientSideData(dataJson.products); // Extract the `products` array
       } catch (error: any) {
         setError(error.message);
       } finally {
         setLoading(false);
       }
     }
-
+  
     getData();
   }, []);
+  
 
   if (error) {
     return <p className="text-center text-red-500 text-xl">{error}</p>;

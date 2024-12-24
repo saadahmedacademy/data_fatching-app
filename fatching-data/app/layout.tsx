@@ -4,6 +4,7 @@ import "./globals.css";
 import PageTransition from "@/components/PageTransition";
 import Navbar from "@/components/Navbar";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,7 +30,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar /> <PageTransition>{children}</PageTransition>
+        <Navbar /> 
+        <PageTransition>
+          {children}
+        </PageTransition>
       </body>
     </html>
   );

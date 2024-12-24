@@ -15,8 +15,8 @@ const Navbar = () => {
             aria-current={pathname === '/' ? 'page' : undefined} 
             className={`pb-1 transition-all duration-200 ${
               pathname === '/' 
-                ? 'font-semibold border-b-2 border-gray-600' 
-                : 'hover:font-medium hover:border-gray-500 focus:font-medium focus:border-gray-500'
+                ? 'font-semibold border-b-2 border-blue-600' 
+                : 'hover:font-medium hover:border-blue-500 focus:font-medium focus:border-gray-500'
             } focus:outline-none`}>
             ClientSideData
           </Link>
@@ -27,8 +27,8 @@ const Navbar = () => {
             aria-current={pathname === '/server-side' ? 'page' : undefined} 
             className={`pb-1 transition-all duration-200 ${
               pathname === '/server-side' 
-                ? 'font-semibold border-b-2 border-gray-600' 
-                : 'hover:font-medium hover:border-gray-500 focus:font-medium focus:border-gray-500'
+                ? 'font-semibold border-b-2 border-blue-600' 
+                : 'hover:font-medium hover:border-blue-500 focus:font-medium focus:border-gray-500'
             } focus:outline-none`}>
             ServerSideData
           </Link>

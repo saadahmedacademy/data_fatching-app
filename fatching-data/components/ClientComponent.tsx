@@ -61,7 +61,7 @@ const ClientComponent = () => {
           throw new Error("Failed to fetch data");
         }
         const dataJson = await response.json();
-        setClientSideData(dataJson.products); // Extract the `products` array
+        setClientSideData(dataJson.products); 
       } catch (error: any) {
         setError(error.message);
       } finally {
@@ -112,7 +112,7 @@ const ClientComponent = () => {
       <section className="w-full mt-8 px-2 pb-8 grid place-items-center gap-4 gap-y-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {ClientSideData.map((data) => (
           <BackgroundGradient key={data.id} className="">
-            <Link href={`/products/${data.id}}`}>
+            <Link href={`/products/${encodeURIComponent(data.id)}`}>
               <div className="rounded-[22px] w-[300px] h-[600px] px-3 py-2 bg-white dark:bg-zinc-900">
                 <div className="w-full h-[280px]">
                   <Image

@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { Spotlight } from "@/components/ui/Spotlight";
 import { useEffect, useState } from "react";
-import Footer from "@/components/Footer";
 
 interface ProductData {
   id: number;
@@ -41,10 +40,9 @@ interface ProductData {
     barcode: string;
     qrCode: string;
   };
-  images: string[];
+  images?: string[]; // Optional field to handle undefined or empty arrays
   thumbnail: string;
 }
-
 
 const ProductDetail = ({ params }: { params: { id: number } }) => {
   const [selectedProduct, setSelectedProduct] = useState<ProductData | null>(
@@ -54,16 +52,17 @@ const ProductDetail = ({ params }: { params: { id: number } }) => {
 
   useEffect(() => {
     setLoading(true);
+    console.log(params.id);
     async function getData() {
       try {
         const response = await fetch(
-          `https://dummyjson.com/products/${params.id}`
+          `https://dummyjson.com/products/`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch product");
         }
-        const dataJson: ProductData = await response.json();
-        setSelectedProduct(dataJson);
+        const dataJson = await response.json();
+        setSelectedProduct(dataJson.products[params.id]);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -92,13 +91,17 @@ const ProductDetail = ({ params }: { params: { id: number } }) => {
           fill="white"
         />
         <div className="container relative z-50 mx-auto flex px-5 py-10 items-center justify-center flex-col">
-          <Image
-            className="lg:w-2/6 md:w-3/6 w-5/6 mb-4 object-cover object-center rounded-lg"
-            alt={selectedProduct.title}
-            src={selectedProduct.images[0]}
-            width={700}
-            height={300}
-          />
+          {selectedProduct.images && selectedProduct.images.length > 0 ? (
+            <Image
+              className="lg:w-2/6 md:w-3/6 w-5/6 mb-4 object-cover object-center rounded-lg"
+              alt={selectedProduct.title}
+              src={`${selectedProduct.images[0]}`}
+              width={700}
+              height={300}
+            />
+          ) : (
+            <p className="text-lg text-gray-400">No image available</p>
+          )}
           <div className="text-center lg:w-2/3 w-full">
             <h1 className="title-font font-bold sm:text-4xl text-3xl mb-4 text-white">
               {selectedProduct.title}
@@ -113,7 +116,6 @@ const ProductDetail = ({ params }: { params: { id: number } }) => {
           </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 };

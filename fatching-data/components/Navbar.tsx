@@ -16,7 +16,7 @@ const Navbar = () => {
             className={`pb-1 transition-all duration-200 ${
               pathname === '/' 
                 ? 'font-semibold border-b-2 border-blue-600' 
-                : 'hover:font-medium hover:border-blue-500 focus:font-medium focus:border-gray-500'
+                : 'hover:font-medium hover:border-blue-500 focus:font-medium focus:border-blue-500'
             } focus:outline-none`}>
             ClientSideData
           </Link>
@@ -28,7 +28,7 @@ const Navbar = () => {
             className={`pb-1 transition-all duration-200 ${
               pathname === '/server-side' 
                 ? 'font-semibold border-b-2 border-blue-600' 
-                : 'hover:font-medium hover:border-blue-500 focus:font-medium focus:border-gray-500'
+                : 'hover:font-medium hover:border-blue-500 focus:font-medium focus:border-blue-500'
             } focus:outline-none`}>
             ServerSideData
           </Link>
